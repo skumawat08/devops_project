@@ -1,0 +1,38 @@
+<build>
+  <plugins>
+    <!-- copy configurations for Heroku Tomcat -->
+    <plugin>
+    	<artifactId>maven-antrun-plugin</artifactId>
+    	<executions>
+    		<execution>
+    			<id>copy-conf</id>
+    			<phase>install</phase>
+    			<configuration>
+    				<tasks>
+    					<copy todir="${project.build.directory}/../tomcat/conf">
+    						<fileset dir="deploy/conf" />
+    					</copy>
+    				</tasks>
+    			</configuration>
+    			<goals>
+    				<goal>run</goal>
+    			</goals>
+    		</execution>
+    		<execution>
+    			<id>copy-project</id>
+    			<phase>install</phase>
+    			<configuration>
+    				<tasks>
+    					<copy todir="${project.build.directory}/../tomcat/webapps/ROOT">
+    						<fileset dir="target/${project.build.finalName}" />
+    					</copy>
+    				</tasks>
+    			</configuration>
+    			<goals>
+    				<goal>run</goal>
+    			</goals>
+    		</execution>
+    	</executions>
+    </plugin>
+  </plugins>
+</build>
